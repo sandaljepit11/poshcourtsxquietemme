@@ -1,0 +1,15 @@
+{
+  "name": "poshcourts-paapi-integration",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "paapi5-nodejs-sdk": "^1.1.0"
+  },
+  "devDependencies": {
+    "vercel": "latest"
+  }
+}

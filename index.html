@@ -75,17 +75,25 @@
 const CONFIG={
  associateTag:"vonderlanddd2-20",
  apiEndpoint:"/api/products",
- usePAAPI:true
+ usePAAPI:true,
+ enableAmazonAutoLoad:true,
+ defaultCategory:"all",
+ categoryKeywords:{
+   all:"womens quiet luxury activewear lingerie sneakers",
+   Lingerie:"luxury silk lingerie womens",
+   "Sports Bras":"premium ribbed sports bra womens",
+   "Workout Outfits":"womens ribbed workout set",
+   Shoes:"womens white leather fashion sneakers"
+ },
+ bestsellerKeywords:"womens premium activewear bestseller"
 };
-// TODO: Replace static products with:
-// fetch(`${CONFIG.apiEndpoint}?keyword=lingerie`).then(r=>r.json())
 </script>
 
 </head>
 <body class="bg-white text-obsidian font-sans antialiased selection:bg-obsidian selection:text-white overflow-x-hidden">
 
   <div class="bg-obsidian text-white text-[10px] tracking-[0.3em] uppercase text-center py-3 px-4 font-sans border-b border-neutral-900 sticky top-0 z-50">
-    
+    The Minimalist Black & White Campaign — Curated Direct Amazon Affiliate Directory
   </div>
 
   <header class="bg-white border-b border-lineSilver/50 z-40 transition-all duration-300">
@@ -100,7 +108,7 @@ const CONFIG={
 
       <!-- Center: Elegant Brand Logo -->
       <a href="#" class="flex flex-col items-center justify-center">
-        <span class="font-serif text-3xl font-light tracking-[0.3em] uppercase">POSHCOURTS x FemmeQuiet</span>
+        <span class="font-serif text-3xl font-light tracking-[0.3em] uppercase">POSHCOURTS</span>
         <span class="text-[8px] tracking-[0.5em] text-studioGray uppercase -mt-1 font-semibold">Studio Paris-New York</span>
       </a>
 
@@ -462,7 +470,7 @@ const CONFIG={
     // ==========================================
     // DATA PORTFOLIO DIRECTORY
     // ==========================================
-    const PRODUCT_ARCHIVES = [
+    let PRODUCT_ARCHIVES = [
       {
         id: "pc-001",
         title: "Silken Cascade Mulberry Silk Lace Slip",
@@ -549,7 +557,7 @@ const CONFIG={
       }
     ];
 
-    const BESTSELLERS = [
+    let BESTSELLERS = [
       {
         id: "pc-007",
         title: "The Court Lux Leather Classic Sneaker",
@@ -581,7 +589,7 @@ const CONFIG={
     ];
 
     // ALL PRODUCTS MERGED
-    const MASTER_INVENTORY = [...PRODUCT_ARCHIVES, ...BESTSELLERS];
+    let MASTER_INVENTORY = [...PRODUCT_ARCHIVES, ...BESTSELLERS];
 
     // ==========================================
     // STATE REGISTRATION
@@ -592,11 +600,78 @@ const CONFIG={
     // ==========================================
     // DOM LIFECYCLE INITIALIZER
     // ==========================================
-    window.onload = function() {
+    window.onload = async function() {
+      updateWishlistBadge();
+      await hydrateProductsFromAmazon();
       renderTrendingGrid();
       renderBestsellers();
-      updateWishlistBadge();
     };
+
+
+
+    // ==========================================
+    // AMAZON PRODUCT ADVERTISING API HYDRATION
+    // ==========================================
+    function normalizeAmazonProduct(item, fallbackCategory = 'Amazon Edit') {
+      const title = item.title || item.ItemInfo?.Title?.DisplayValue || 'Amazon Product';
+      const brand = item.brand || item.ItemInfo?.ByLineInfo?.Brand?.DisplayValue || 'Amazon';
+      const image = item.image || item.Images?.Primary?.Large?.URL || item.Images?.Primary?.Medium?.URL || 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&w=600&q=80';
+      const priceText = item.price || item.Offers?.Listings?.[0]?.Price?.DisplayAmount || 'View on Amazon';
+      const url = item.amazonUrl || item.DetailPageURL || `https://www.amazon.com/s?k=${encodeURIComponent(title)}&tag=${CONFIG.associateTag}`;
+      const asin = item.asin || item.ASIN || `amazon-${Math.random().toString(36).slice(2)}`;
+      const featureOne = item.ItemInfo?.Features?.DisplayValues?.[0];
+
+      return {
+        id: `amz-${asin}`,
+        asin,
+        title,
+        brand,
+        category: item.category || fallbackCategory,
+        price: priceText,
+        priceValue: Number(String(priceText).replace(/[^0-9.]/g, '')) || 0,
+        rating: item.rating || 4.6,
+        reviewsCount: item.reviewsCount || 0,
+        image,
+        description: item.description || featureOne || 'Live Amazon Product Advertising API result with current product details where available.',
+        features: item.features || item.ItemInfo?.Features?.DisplayValues?.slice(0, 4) || ['Amazon PA-API result', 'Affiliate link generated server-side', 'Price and image sourced from Amazon when available', 'Opens securely on Amazon'],
+        amazonUrl: url
+      };
+    }
+
+    async function fetchAmazonProducts(keyword, category, limit = 6) {
+      const url = new URL(CONFIG.apiEndpoint, window.location.origin);
+      url.searchParams.set('keyword', keyword);
+      url.searchParams.set('category', category);
+      url.searchParams.set('limit', limit);
+
+      const response = await fetch(url.toString(), { headers: { 'Accept': 'application/json' } });
+      if (!response.ok) throw new Error(`Amazon endpoint returned ${response.status}`);
+      const payload = await response.json();
+      return (payload.products || payload.items || []).map(item => normalizeAmazonProduct(item, category));
+    }
+
+    async function hydrateProductsFromAmazon() {
+      if (!CONFIG.usePAAPI || !CONFIG.enableAmazonAutoLoad) return;
+
+      try {
+        const categoryEntries = Object.entries(CONFIG.categoryKeywords).filter(([category]) => category !== 'all');
+        const categoryProductGroups = await Promise.all(
+          categoryEntries.map(([category, keyword]) => fetchAmazonProducts(keyword, category, 4))
+        );
+
+        const liveProducts = categoryProductGroups.flat();
+        const liveBestSellers = await fetchAmazonProducts(CONFIG.bestsellerKeywords, 'Workout Outfits', 2);
+
+        if (liveProducts.length) PRODUCT_ARCHIVES = liveProducts;
+        if (liveBestSellers.length) BESTSELLERS = liveBestSellers;
+        MASTER_INVENTORY = [...PRODUCT_ARCHIVES, ...BESTSELLERS];
+        showToast('Amazon Product Advertising API catalog loaded.');
+      } catch (error) {
+        console.warn('Amazon PA-API unavailable. Static fallback catalog loaded.', error);
+        MASTER_INVENTORY = [...PRODUCT_ARCHIVES, ...BESTSELLERS];
+        showToast('Static fallback catalog loaded.');
+      }
+    }
 
     // ==========================================
     // STARK CUSTOM TOAST NOTIFICATION
@@ -713,10 +788,11 @@ const CONFIG={
 
     function filterTrending(cat, element) {
       activeTrendingFilter = cat;
-      const buttons = element.parentElement.querySelectorAll('button');
-      buttons.forEach(btn => btn.className = 'px-4 py-2 border-b-2 border-transparent text-studioGray hover:text-obsidian transition-all');
-      
-      element.className = 'px-4 py-2 border-b-2 border-obsidian text-obsidian transition-all';
+      if (element && element.parentElement) {
+        const buttons = element.parentElement.querySelectorAll('button');
+        buttons.forEach(btn => btn.className = 'px-4 py-2 border-b-2 border-transparent text-studioGray hover:text-obsidian transition-all');
+        element.className = 'px-4 py-2 border-b-2 border-obsidian text-obsidian transition-all';
+      }
       renderTrendingGrid();
     }
 
