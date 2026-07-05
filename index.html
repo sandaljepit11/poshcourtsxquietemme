@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PoshCourts | Quiet Luxury Women's Activewear & Minimalist Lingerie</title>
+  
+  <!-- SEO Optimization -->
+  <meta name="description" content="A curated editorial directory for high-fashion activewear, sports bras, pure silk lingerie, and luxury sneakers. Experience our interactive monochrome Capsule Closet Studio.">
+  <meta name="keywords" content="minimalist activewear, designer lingerie, monochrome sports bra, luxury sneakers, quiet luxury, capsule closet">
+  <meta name="robots" content="index, follow">
+
+  <!-- Google Fonts & Icon Libraries -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#050505',
+            graphite: '#121212',
+            studioGray: '#737373',
+            platinum: '#F5F5F5',
+            lineSilver: '#E5E5E5',
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Inter"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Elegant Styles -->
+  <style>
+    /* Custom Scrollbar for Luxury Aesthetics */
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FFFFFF;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #050505;
+    }
+    
+    /* Image zoom hover effect */
+    .img-zoom {
+      transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .group:hover .img-zoom {
+      transform: scale(1.03);
+    }
+
+    /* Asymmetric grid styling */
+    .asymmetric-col {
+      align-self: start;
+    }
+    @media (min-width: 1024px) {
+      .asymmetric-col:nth-child(even) {
+        margin-top: 4rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-white text-obsidian font-sans antialiased selection:bg-obsidian selection:text-white overflow-x-hidden">
+
+  <div class="bg-obsidian text-white text-[10px] tracking-[0.3em] uppercase text-center py-3 px-4 font-sans border-b border-neutral-900 sticky top-0 z-50">
+    The Minimalist Black & White Campaign — Curated Direct Amazon Affiliate Directory
+  </div>
+
+  <header class="bg-white border-b border-lineSilver/50 z-40 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 h-24 flex items-center justify-between">
+      
+      <!-- Left: Navigation links -->
+      <nav class="hidden lg:flex items-center space-x-10 text-[11px] tracking-[0.25em] uppercase font-medium">
+        <a href="#trending" class="hover:text-studioGray transition-colors duration-300 font-bold">The Edit</a>
+        <a href="#best-sellers" class="hover:text-studioGray transition-colors duration-300">Bestselling</a>
+        <a href="#journal" class="hover:text-studioGray transition-colors duration-300">The Journal</a>
+      </nav>
+
+      <!-- Center: Elegant Brand Logo -->
+      <a href="#" class="flex flex-col items-center justify-center">
+        <span class="font-serif text-3xl font-light tracking-[0.3em] uppercase">POSHCOURTS</span>
+        <span class="text-[8px] tracking-[0.5em] text-studioGray uppercase -mt-1 font-semibold">Studio Paris-New York</span>
+      </a>
+
+      <!-- Right: Search, Closet Trigger and Wishlist Indicators -->
+      <div class="flex items-center space-x-6 text-sm">
+        <button onclick="toggleSearch(true)" class="hover:text-studioGray transition-colors" aria-label="Search items">
+          <i class="fa-solid fa-magnifying-glass text-lg"></i>
+        </button>
+        <button onclick="toggleWishlistDrawer(true)" class="relative hover:text-studioGray transition-colors" aria-label="Open Saved Items">
+          <i class="fa-regular fa-heart text-lg"></i>
+          <span id="wishlist-counter" class="absolute -top-2 -right-2 bg-obsidian text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+        </button>
+        <!-- Mobile Toggle Button -->
+        <button onclick="toggleMobileNav(true)" class="lg:hidden hover:text-studioGray transition-colors">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Live Search Overlay Sliding Down -->
+  <div id="search-overlay" class="fixed inset-x-0 top-0 bg-white border-b border-lineSilver z-[60] transform -translate-y-full transition-transform duration-500 ease-in-out p-8 shadow-2xl">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <input 
+        type="text" 
+        id="search-input-box" 
+        oninput="executeLiveSearch(this.value)"
+        placeholder="Type to find premium items (e.g. Silk, Bra, Sneaker)..." 
+        class="w-full bg-transparent border-b border-obsidian py-4 text-xl sm:text-3xl font-serif tracking-wide focus:outline-none placeholder:text-neutral-300"
+      >
+      <button onclick="toggleSearch(false)" class="text-obsidian hover:text-studioGray ml-6 transition-colors"><i class="fa-solid fa-xmark text-2xl"></i></button>
+    </div>
+    <!-- Interactive Live Search Results Display -->
+    <div id="search-results-wrapper" class="max-w-4xl mx-auto mt-8 hidden">
+      <p class="text-[10px] tracking-widest uppercase text-studioGray mb-4">MATCHING EDITS</p>
+      <div id="search-results-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-72 overflow-y-auto"></div>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-menu" class="fixed inset-y-0 left-0 w-80 bg-white z-[60] shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between">
+    <div class="p-6">
+      <div class="flex items-center justify-between border-b border-lineSilver pb-4 mb-8">
+        <span class="font-serif text-xl tracking-widest uppercase">POSHCOURTS</span>
+        <button onclick="toggleMobileNav(false)" class="text-obsidian"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+      <nav class="flex flex-col space-y-6 text-xs tracking-widest uppercase font-medium">
+        <a href="#trending" onclick="toggleMobileNav(false)" class="hover:text-studioGray">Trending Edits</a>
+        <a href="#best-sellers" onclick="toggleMobileNav(false)" class="hover:text-studioGray">Bestsellers</a>
+        <a href="#journal" onclick="toggleMobileNav(false)" class="hover:text-studioGray">Style Journal</a>
+      </nav>
+    </div>
+    <div class="p-6 bg-platinum border-t border-lineSilver text-[10px] text-studioGray leading-relaxed italic">
+      Curated strictly in monochrome luxury. PoshCourts recommends elite fabrications processed directly through Amazon affiliate integrations.
+    </div>
+  </div>
+  <div id="mobile-menu-backdrop" onclick="toggleMobileNav(false)" class="fixed inset-0 bg-black/45 z-50 hidden"></div>
+
+  <!-- Wishlist Slide-Out Drawer -->
+  <div id="wishlist-drawer" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-white z-[60] shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between">
+    <div class="p-6 overflow-y-auto flex-1">
+      <div class="flex items-center justify-between border-b border-lineSilver pb-4 mb-6">
+        <span class="font-serif text-lg tracking-widest uppercase flex items-center gap-2">SAVED STYLING</span>
+        <button onclick="toggleWishlistDrawer(false)" class="text-obsidian"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+      <div id="wishlist-drawer-items" class="space-y-6"></div>
+    </div>
+    <div class="p-6 bg-platinum border-t border-lineSilver">
+      <p class="text-[10px] text-studioGray mb-4 text-center">Fulfill securely directly through standard secure Amazon carts.</p>
+      <a href="https://www.amazon.com/s?k=premium+womens+fashion&tag=poshcourts-20" target="_blank" rel="nofollow sponsored" class="w-full bg-obsidian text-white py-3.5 text-center block text-[10px] font-sans tracking-[0.2em] uppercase hover:bg-studioGray transition-colors duration-300 rounded-sm">
+        EXPLORE CAPSULE BASE
+      </a>
+    </div>
+  </div>
+  <div id="wishlist-drawer-backdrop" onclick="toggleWishlistDrawer(false)" class="fixed inset-0 bg-black/45 z-50 hidden"></div>
+
+  <section class="relative h-[90vh] bg-obsidian overflow-hidden flex items-center justify-center">
+    <div class="absolute inset-0">
+      <img 
+        src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&w=1600&q=80" 
+        alt="PoshCourts Premium Luxury Campaign" 
+        class="w-full h-full object-cover object-top opacity-35 scale-100 transition-transform duration-[12000ms] hover:scale-105"
+      >
+      <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-black/30"></div>
+    </div>
+
+    <div class="relative max-w-5xl mx-auto text-center px-6 z-10 text-white flex flex-col items-center">
+      <span class="text-[10px] tracking-[0.4em] uppercase mb-4 text-studioGray font-semibold">SUMMER STARK EDITION 2026</span>
+      <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-light tracking-wide mb-6 max-w-4xl leading-[1.1]">
+        Quiet luxury meets stark precision.
+      </h1>
+      <p class="text-[11px] sm:text-[12px] tracking-[0.2em] max-w-md mb-10 text-neutral-400 font-light leading-relaxed">
+        Curating a collection of minimalist activewear, structured sports bras, and fine lingerie in high contrast.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a 
+          href="#trending" 
+          class="bg-white text-obsidian hover:bg-neutral-200 px-8 py-3.5 rounded-sm text-[10px] tracking-widest uppercase font-medium transition-colors duration-300 shadow-md"
+        >
+          Explore Collection
+        </a>
+        <a 
+          href="#best-sellers" 
+          class="border border-white/45 hover:border-white px-8 py-3.5 rounded-sm text-[10px] tracking-widest uppercase font-medium transition-colors duration-300"
+        >
+          Bestsellers
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-2 opacity-60">
+      <span class="text-[8px] tracking-[0.3em] uppercase text-white font-light">Scroll down</span>
+      <div class="w-[1px] h-8 bg-white/40 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1/2 bg-white animate-bounce"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="trending" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 border-b border-lineSilver pb-6">
+        <div>
+          <span class="text-[10px] tracking-[0.3em] uppercase text-studioGray font-bold">HANDPICKED EDITS</span>
+          <h2 class="font-serif text-3xl sm:text-4xl mt-1 font-light text-obsidian">Trending Directives</h2>
+        </div>
+        
+        <!-- Stark Category Selectors -->
+        <div class="flex flex-wrap gap-2.5 mt-6 md:mt-0 font-serif text-[10px] tracking-[0.25em] uppercase font-bold">
+          <button onclick="filterTrending('all', this)" class="px-4 py-2 border-b-2 border-obsidian text-obsidian transition-all">All Pieces</button>
+          <button onclick="filterTrending('Lingerie', this)" class="px-4 py-2 border-b-2 border-transparent text-studioGray hover:text-obsidian transition-all">Lingerie</button>
+          <button onclick="filterTrending('Sports Bras', this)" class="px-4 py-2 border-b-2 border-transparent text-studioGray hover:text-obsidian transition-all">Sports Bras</button>
+          <button onclick="filterTrending('Workout Outfits', this)" class="px-4 py-2 border-b-2 border-transparent text-studioGray hover:text-obsidian transition-all">Outfits</button>
+          <button onclick="filterTrending('Shoes', this)" class="px-4 py-2 border-b-2 border-transparent text-studioGray hover:text-obsidian transition-all">Shoes</button>
+        </div>
+      </div>
+
+      <div id="trending-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <!-- JS Populated Product Cards -->
+      </div>
+    </div>
+  </section>
+
+  <section id="best-sellers" class="py-24 bg-platinum border-t border-b border-lineSilver">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="text-center max-w-2xl mx-auto mb-20">
+        <span class="text-[10px] tracking-[0.3em] uppercase text-studioGray font-bold">THE PERENNIAL DIRECTIVE</span>
+        <h2 class="font-serif text-3xl sm:text-4xl mt-2 mb-4 font-light text-obsidian">Consistent Best Sellers</h2>
+        <div class="h-[1px] w-12 bg-obsidian/30 mx-auto"></div>
+        <p class="text-xs text-studioGray font-serif italic mt-4">Voted for absolute longevity. High fabric retention and geometric structural beauty.</p>
+      </div>
+
+      <div id="bestsellers-grid" class="space-y-24">
+        <!-- Alternating visual cards populated dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <section id="journal" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-[10px] tracking-[0.3em] uppercase text-studioGray font-bold">EDITORIAL REFLECTION</span>
+        <h2 class="font-serif text-3xl sm:text-4xl mt-2 mb-4 font-light text-obsidian">The Style Journal</h2>
+        <div class="h-[1px] w-12 bg-obsidian/30 mx-auto"></div>
+        <p class="text-xs text-studioGray font-serif italic mt-4">Analyses on construction, textiles, and clean modern aesthetic silhouettes.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <!-- Post 1 -->
+        <article class="group cursor-pointer">
+          <div class="overflow-hidden bg-platinum rounded-sm mb-4 aspect-[4/3] relative">
+            <img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&w=600&q=80" alt="Journal guide 1" class="w-full h-full object-cover img-zoom">
+            <span class="absolute top-4 left-4 bg-white text-obsidian text-[8px] tracking-[0.2em] uppercase py-1.5 px-3 font-semibold">BUYING GUIDE</span>
+          </div>
+          <span class="text-[9px] text-studioGray tracking-widest uppercase font-serif block mb-1">July 4, 2026 • 5 Min Read</span>
+          <h3 class="font-serif text-lg mb-2 text-obsidian group-hover:text-studioGray transition-colors leading-snug">Structuring Minimalist Outerwear with Active Base Layers</h3>
+          <p class="text-xs text-studioGray leading-relaxed font-light mb-4 line-clamp-2">How top creative directors seamlessly interface standard active bras with raw tailoring.</p>
+          <span class="text-[9px] tracking-[0.2em] font-serif text-obsidian uppercase hover:underline">View Article →</span>
+        </article>
+
+        <!-- Post 2 -->
+        <article class="group cursor-pointer">
+          <div class="overflow-hidden bg-platinum rounded-sm mb-4 aspect-[4/3] relative">
+            <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=600&q=80" alt="Journal guide 2" class="w-full h-full object-cover img-zoom">
+            <span class="absolute top-4 left-4 bg-white text-obsidian text-[8px] tracking-[0.2em] uppercase py-1.5 px-3 font-semibold">TEXTILES</span>
+          </div>
+          <span class="text-[9px] text-studioGray tracking-widest uppercase font-serif block mb-1">June 28, 2026 • 4 Min Read</span>
+          <h3 class="font-serif text-lg mb-2 text-obsidian group-hover:text-studioGray transition-colors leading-snug">The Architecture of Compression High-Impact Knitwear</h3>
+          <p class="text-xs text-studioGray leading-relaxed font-light mb-4 line-clamp-2">Exploring elastic Recovery indexes to understand support structures without underwires.</p>
+          <span class="text-[9px] tracking-[0.2em] font-serif text-obsidian uppercase hover:underline">View Article →</span>
+        </article>
+
+        <!-- Post 3 -->
+        <article class="group cursor-pointer">
+          <div class="overflow-hidden bg-platinum rounded-sm mb-4 aspect-[4/3] relative">
+            <img src="https://images.unsplash.com/photo-1582533561751-ef6f6ab93a2e?auto=format&fit=crop&w=600&q=80" alt="Journal guide 3" class="w-full h-full object-cover img-zoom">
+            <span class="absolute top-4 left-4 bg-white text-obsidian text-[8px] tracking-[0.2em] uppercase py-1.5 px-3 font-semibold">CARE GUIDE</span>
+          </div>
+          <span class="text-[9px] text-studioGray tracking-widest uppercase font-serif block mb-1">May 19, 2026 • 6 Min Read</span>
+          <h3 class="font-serif text-lg mb-2 text-obsidian group-hover:text-studioGray transition-colors leading-snug">Preserving Heavyweight Pure Mulberry Silk Threads</h3>
+          <p class="text-xs text-studioGray leading-relaxed font-light mb-4 line-clamp-2">Maintaining tactile luster through cold organic cleanings and specific drying methods.</p>
+          <span class="text-[9px] tracking-[0.2em] font-serif text-obsidian uppercase hover:underline">View Article →</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-obsidian text-white border-t border-neutral-900">
+    <div class="max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
+      <span class="text-[10px] tracking-[0.35em] uppercase text-studioGray mb-3 font-bold">THE PRIVATE DIRECTORY DISPATCH</span>
+      <h2 class="font-serif text-3xl sm:text-4xl font-light mb-4 tracking-wide text-white">Join PoshCourts Inner Circle</h2>
+      <p class="text-xs sm:text-[13px] text-neutral-400 font-sans tracking-[0.1em] max-w-md mb-10 leading-relaxed font-light">
+        Uncompromised updates. Early access to vetted listings and structural activewear look guides sent twice a month.
+      </p>
+      <form onsubmit="handleNewsletterSubmit(event)" class="w-full max-w-md flex flex-col sm:flex-row gap-4 border-b border-white/20 pb-2">
+        <input 
+          type="email" 
+          required 
+          placeholder="ENTER YOUR EMAIL FOR ARCHIVAL ACCESS" 
+          class="flex-1 bg-transparent py-3 text-xs focus:outline-none placeholder:text-neutral-600 tracking-widest uppercase text-white"
+        >
+        <button 
+          type="submit" 
+          class="bg-white text-obsidian hover:bg-neutral-200 px-8 py-3 rounded-sm text-[10px] font-sans tracking-widest uppercase transition-colors duration-300 font-bold"
+        >
+          SUBSCRIBE
+        </button>
+      </form>
+      <span class="text-[9px] text-neutral-500 mt-4 tracking-widest uppercase italic">No redundant mailings. Seamless single click opt-out.</span>
+    </div>
+  </section>
+
+  <footer class="bg-white border-t border-lineSilver pt-20 pb-8 text-obsidian">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        
+        <!-- Brand Summary -->
+        <div>
+          <span class="font-serif text-2xl tracking-[0.25em] uppercase mb-1 block">POSHCOURTS</span>
+          <span class="text-[8px] tracking-[0.5em] text-studioGray uppercase block mb-4">Paris New-York</span>
+          <p class="text-xs text-studioGray leading-relaxed font-light">
+            Vetting structured, high-retention athletic wear and intimates. Designed for the uncompromised modern lifestyle.
+          </p>
+        </div>
+
+        <!-- Curated Links -->
+        <div>
+          <h4 class="font-sans text-[10px] tracking-[0.2em] uppercase mb-4 text-obsidian font-bold">DIRECTORY ARCHIVES</h4>
+          <ul class="space-y-2.5 text-xs text-studioGray font-light">
+            <li><a href="#trending" onclick="filterTrending('Lingerie')" class="hover:text-obsidian transition-colors">Fine Silk Intimates</a></li>
+            <li><a href="#trending" onclick="filterTrending('Sports Bras')" class="hover:text-obsidian transition-colors">Knit Sports Bras</a></li>
+            <li><a href="#trending" onclick="filterTrending('Workout Outfits')" class="hover:text-obsidian transition-colors">Structured Outfits</a></li>
+            <li><a href="#trending" onclick="filterTrending('Shoes')" class="hover:text-obsidian transition-colors">Aesthetic Sneakers</a></li>
+          </ul>
+        </div>
+
+        <!-- System Houses -->
+        <div>
+          <h4 class="font-sans text-[10px] tracking-[0.2em] uppercase mb-4 text-obsidian font-bold">THE HOUSE</h4>
+          <ul class="space-y-2.5 text-xs text-studioGray font-light">
+            <li><a href="#journal" class="hover:text-obsidian transition-colors">Style Journals</a></li>
+            <li><a href="#" class="hover:text-obsidian transition-colors">About Directives</a></li>
+            <li><a href="#" class="hover:text-obsidian transition-colors">Submit Fabric Profile</a></li>
+          </ul>
+        </div>
+
+        <!-- Affiliate compliance block -->
+        <div>
+          <h4 class="font-sans text-[10px] tracking-[0.2em] uppercase mb-4 text-obsidian font-bold">AFFILIATION DIRECTIVE</h4>
+          <p class="text-[10px] text-studioGray leading-relaxed font-light mb-4 italic">
+            PoshCourts is an independent, high-fashion portal participating in the Amazon Services LLC Associates Program. We direct styling selections safely through Amazon secure networks.
+          </p>
+          <div class="flex items-center gap-2 text-xs text-obsidian">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span class="text-[10px] tracking-widest uppercase font-semibold">Protected Direct Fulfillments</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Legal footer lines -->
+      <div class="border-t border-lineSilver pt-8 flex flex-col md:flex-row items-center justify-between text-[11px] text-studioGray font-light">
+        <p>&copy; 2026 POSHCOURTS. Handcrafted premium minimalism directive. All rights reserved.</p>
+        <div class="flex space-x-6 mt-4 md:mt-0">
+          <a href="#" class="hover:text-obsidian transition-colors">Privacy Charter</a>
+          <a href="#" class="hover:text-obsidian transition-colors">Terms of Operations</a>
+          <a href="#" class="hover:text-obsidian transition-colors">Amazon Associates Disclosure</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-out Details Panel (Replaces standard popup modals) -->
+  <div id="quick-look-panel" class="fixed inset-y-0 right-0 w-full sm:w-[500px] bg-white z-[70] shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col justify-between hidden">
+    <div class="p-8 overflow-y-auto flex-1">
+      <div class="flex items-center justify-between border-b border-lineSilver pb-4 mb-6">
+        <div>
+          <span id="ql-category" class="text-[9px] tracking-[0.2em] text-studioGray uppercase block">PORTFOLIO ARCHIVE</span>
+          <h3 id="ql-title" class="font-serif text-2xl font-light text-obsidian mt-1 uppercase">PRODUCT SPECIFICATION</h3>
+        </div>
+        <button onclick="closeQuickLook()" class="text-obsidian p-2 hover:text-studioGray transition-colors"><i class="fa-solid fa-xmark text-xl"></i></button>
+      </div>
+
+      <!-- Main Visual -->
+      <div class="aspect-square bg-platinum rounded-sm overflow-hidden mb-6 relative">
+        <img id="ql-image" src="" alt="Detailed view" class="w-full h-full object-cover">
+      </div>
+
+      <!-- Brand and Price -->
+      <div class="flex justify-between items-baseline mb-6 border-b border-lineSilver pb-4">
+        <div>
+          <span id="ql-brand" class="text-xs text-studioGray uppercase tracking-widest font-medium">STUDIO FABRICATION</span>
+        </div>
+        <div id="ql-price" class="font-serif text-xl font-bold text-obsidian">$0.00</div>
+      </div>
+
+      <!-- Descriptions -->
+      <p id="ql-description" class="text-xs text-studioGray leading-relaxed mb-6 font-light"></p>
+
+      <!-- Key Specs Checklist -->
+      <h5 class="text-[10px] tracking-widest uppercase text-obsidian font-bold mb-3">CONSTRUCTION HIGHLIGHTS</h5>
+      <ul id="ql-features" class="text-xs text-studioGray space-y-2 list-none pl-0 mb-8">
+        <!-- Dynamic bullet points -->
+      </ul>
+    </div>
+
+    <!-- Panel Actions -->
+    <div class="p-8 bg-platinum border-t border-lineSilver flex flex-col gap-3">
+      <a id="ql-amazon-url" href="#" target="_blank" rel="nofollow sponsored" class="w-full bg-obsidian text-white text-center py-3.5 text-xs font-sans tracking-[0.2em] uppercase hover:bg-studioGray transition-colors duration-300 rounded-sm flex items-center justify-center gap-2">
+        BUY FROM AMAZON DIRECTLY <i class="fa-solid fa-arrow-up-right text-[10px]"></i>
+      </a>
+      <button id="ql-wishlist-toggle" class="w-full border border-obsidian/30 py-3.5 text-xs font-sans tracking-[0.2em] uppercase hover:border-obsidian transition-colors duration-300 rounded-sm text-obsidian bg-white">
+        SAVE TO PRIVATE EDIT
+      </button>
+    </div>
+  </div>
+  <div id="quick-look-backdrop" onclick="closeQuickLook()" class="fixed inset-0 bg-black/50 backdrop-blur-xs z-[65] hidden"></div>
+
+  <!-- STARK TOAST NOTIFICATIONS CONTAINER -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none"></div>
+
+  <!-- ELEGANT FLOATING BUYER NOTIFICATION CONTAINER -->
+  <div id="floating-buyer-notif" class="fixed bottom-6 left-6 z-50 bg-white border border-lineSilver p-4 rounded-sm shadow-2xl max-w-xs sm:max-w-sm flex items-center gap-4 transform translate-y-24 opacity-0 transition-all duration-700 ease-out pointer-events-auto">
+    <div class="w-10 h-10 bg-platinum rounded-full flex items-center justify-center text-obsidian border border-lineSilver/30 shrink-0">
+      <i class="fa-solid fa-bag-shopping text-sm"></i>
+    </div>
+    <div class="flex-1 min-w-0">
+      <p class="text-[9px] uppercase tracking-[0.2em] text-studioGray font-bold" id="fbn-buyer">Verified Buyer</p>
+      <p class="text-xs text-obsidian font-serif italic truncate" id="fbn-action">Acquired a premium piece</p>
+      <span class="text-[8px] tracking-wider text-neutral-400 block mt-0.5" id="fbn-time">Just now</span>
+    </div>
+    <button onclick="document.getElementById('floating-buyer-notif').classList.add('translate-y-24', 'opacity-0')" class="text-neutral-400 hover:text-obsidian transition-colors self-start p-1" aria-label="Close notification">
+      <i class="fa-solid fa-xmark text-[10px]"></i>
+    </button>
+  </div>
+
+  <script>
+    // ==========================================
+    // DATA PORTFOLIO DIRECTORY
+    // ==========================================
+    const PRODUCT_ARCHIVES = [
+      {
+        id: "pc-001",
+        title: "Silken Cascade Mulberry Silk Lace Slip",
+        brand: "Aura Intimates",
+        category: "Lingerie",
+        price: "$149.00",
+        priceValue: 149.00,
+        rating: 4.8,
+        reviewsCount: 124,
+        image: "https://images.unsplash.com/photo-1582533561751-ef6f6ab93a2e?auto=format&fit=crop&w=600&q=80",
+        description: "Elegantly constructed using 19-momme pure mulberry silk, complete with intricate French lace borders. Features cross-back straps and a soft feminine hemline that offers unrivaled skin comfort.",
+        features: ["100% Top-Grade Mulberry Silk", "Intricate Leavers Lace trim detailing", "Fully adjustable cross-back straps", "Breathable, lightweight, hypo-allergenic weave"],
+        amazonUrl: "https://www.amazon.com/s?k=luxury+silk+lingerie+slip+womens&tag=poshcourts-20"
+      },
+      {
+        id: "pc-002",
+        title: "AeroForm Minimalist Ribbed Sports Bra",
+        brand: "Kinetix Luxe",
+        category: "Sports Bras",
+        price: "$48.00",
+        priceValue: 48.00,
+        rating: 4.6,
+        reviewsCount: 382,
+        image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=80",
+        description: "Designed for mid-to-high impact movements, featuring compression support that moves with your natural posture. Crafted from a seamless sweat-wicking knit material in soft neutral earth tones.",
+        features: ["Seamless moisture-management weave", "Removable memory-foam inner cups", "Anti-chafing flatlock seams", "Minimalist aesthetic back alignment"],
+        amazonUrl: "https://www.amazon.com/s?k=ribbed+sports+bra+womens+premium&tag=poshcourts-20"
+      },
+      {
+        id: "pc-003",
+        title: "Solace Ribbed Performance Legging & Bra Set",
+        brand: "Courtside Studio",
+        category: "Workout Outfits",
+        price: "$98.00",
+        priceValue: 98.00,
+        rating: 4.7,
+        reviewsCount: 412,
+        image: "https://images.unsplash.com/photo-1508962914676-134849a727f0?auto=format&fit=crop&w=600&q=80",
+        description: "A complete coordinated two-piece set including high-rise compression leggings and a low-neck athletic crop bra. Fabric offers light tummy compression with double-knit squat proof confidence.",
+        features: ["Four-way custom flex stretch yarn", "Non-slip high-rise wide waistband", "Aesthetic rib-knit alignment panels", "Comes complete as a single style box"],
+        amazonUrl: "https://www.amazon.com/s?k=womens+ribbed+workout+legging+and+bra+set&tag=poshcourts-20"
+      },
+      {
+        id: "pc-004",
+        title: "Velvet Cloud Off-White Cushion Sneaker",
+        brand: "Veloce Footwear",
+        category: "Shoes",
+        price: "$180.00",
+        priceValue: 180.00,
+        rating: 4.9,
+        reviewsCount: 92,
+        image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=80",
+        description: "Premium neutral leather and breathable mesh upper panels with custom shock-absorbing orthotics. This style acts as the perfect daily companion from athletic courts to high-fashion avenues.",
+        features: ["Italian leather & technical mesh paneling", "Hand-stitched perimeter trim", "High traction premium rubber outsole", "Ergonomic inner support footbed"],
+        amazonUrl: "https://www.amazon.com/s?k=womens+premium+neutral+fashion+sneakers&tag=poshcourts-20"
+      },
+      {
+        id: "pc-005",
+        title: "SleekSculpt Compression High-Impact Bra",
+        brand: "Kinetix Luxe",
+        category: "Sports Bras",
+        price: "$55.00",
+        priceValue: 55.00,
+        rating: 4.7,
+        reviewsCount: 201,
+        image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80",
+        description: "Engineered specifically to support full strides and dynamic court work without constriction. Beautiful scoop backline ensures maximum ventilation.",
+        features: ["Under-bust supportive banding", "Anti-microbial fast-dry treatment", "Soft neutral gold color scheme", "High elasticity recovery retention"],
+        amazonUrl: "https://www.amazon.com/s?k=high+impact+sports+bra+premium&tag=poshcourts-20"
+      },
+      {
+        id: "pc-006",
+        title: "Silk-Lace Ethereal Bralette Set",
+        brand: "Aura Intimates",
+        category: "Lingerie",
+        price: "$115.00",
+        priceValue: 115.00,
+        rating: 4.5,
+        reviewsCount: 68,
+        image: "https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&w=600&q=80",
+        description: "Indulge in absolute soft elegance. Handcrafted thin lace floral patterns set over highly supportive beige under-lining.",
+        features: ["Soft wire-free supportive cups", "Adjustable gold-tone buckles", "Premium elastic microfiber trim", "Feminine, timeless styling profile"],
+        amazonUrl: "https://www.amazon.com/s?k=lace+bralette+set+womens+silk&tag=poshcourts-20"
+      }
+    ];
+
+    const BESTSELLERS = [
+      {
+        id: "pc-007",
+        title: "The Court Lux Leather Classic Sneaker",
+        brand: "Courtside Studio",
+        category: "Shoes",
+        price: "$135.00",
+        priceValue: 135.00,
+        rating: 4.8,
+        reviewsCount: 1532,
+        image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80",
+        description: "A staple in quiet luxury lifestyle footwear. Reimagined with soft-textured leather, clean geometric eyelets, and an immaculate, minimalist profile. Styled perfectly with tennis wear or casual tailoring.",
+        features: ["Constructed with 100% full-grain calfskin", "Premium non-slip textured rubber soles", "Double padded memory foam lining", "Includes designer dust bags"],
+        amazonUrl: "https://www.amazon.com/s?k=womens+white+leather+classic+tennis+sneaker&tag=poshcourts-20"
+      },
+      {
+        id: "pc-008",
+        title: "Coordinated Ribbed Knit Loungewear Outfit",
+        brand: "Courtside Studio",
+        category: "Workout Outfits",
+        price: "$110.00",
+        priceValue: 110.00,
+        rating: 4.9,
+        reviewsCount: 741,
+        image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80",
+        description: "Meticulously woven loungewear crafted with an ultra-soft modal cotton mix. Keeps you remarkably cozy through flights or early-morning active gym warmups.",
+        features: ["Heavyweight premium stretch weave", "High waist elastic flare silhouette", "Drop-shoulder relaxed top jacket", "Anti-pilling premium finish"],
+        amazonUrl: "https://www.amazon.com/s?k=womens+premium+knit+loungewear+set&tag=poshcourts-20"
+      }
+    ];
+
+    // ALL PRODUCTS MERGED
+    const MASTER_INVENTORY = [...PRODUCT_ARCHIVES, ...BESTSELLERS];
+
+    // ==========================================
+    // STATE REGISTRATION
+    // ==========================================
+    let wishlist = JSON.parse(localStorage.getItem('poshcourts_wishlist')) || [];
+    let activeTrendingFilter = 'all';
+
+    // ==========================================
+    // DOM LIFECYCLE INITIALIZER
+    // ==========================================
+    window.onload = function() {
+      renderTrendingGrid();
+      renderBestsellers();
+      updateWishlistBadge();
+    };
+
+    // ==========================================
+    // STARK CUSTOM TOAST NOTIFICATION
+    // ==========================================
+    function showToast(message) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'bg-obsidian text-white border border-neutral-800 text-[10px] tracking-widest uppercase py-3.5 px-6 rounded-sm shadow-2xl pointer-events-auto transform translate-y-3 opacity-0 transition-all duration-300 flex items-center gap-3 font-medium';
+      toast.innerHTML = `
+        <div class="w-1.5 h-1.5 bg-white rounded-full animate-ping"></div>
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+      
+      // Animate in
+      setTimeout(() => {
+        toast.classList.remove('translate-y-3', 'opacity-0');
+      }, 50);
+
+      // Dismiss Automatically
+      setTimeout(() => {
+        toast.classList.add('translate-y-3', 'opacity-0');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // ==========================================
+    // CORE UI TOGGLES
+    // ==========================================
+    function toggleSearch(open) {
+      const searchBox = document.getElementById('search-overlay');
+      const input = document.getElementById('search-input-box');
+      if(open) {
+        searchBox.classList.remove('-translate-y-full');
+        input.focus();
+      } else {
+        searchBox.classList.add('-translate-y-full');
+        input.value = '';
+        document.getElementById('search-results-wrapper').classList.add('hidden');
+      }
+    }
+
+    function toggleMobileNav(open) {
+      const menu = document.getElementById('mobile-menu');
+      const backdrop = document.getElementById('mobile-menu-backdrop');
+      if(open) {
+        menu.classList.remove('-translate-x-full');
+        backdrop.classList.remove('hidden');
+      } else {
+        menu.classList.add('-translate-x-full');
+        backdrop.classList.add('hidden');
+      }
+    }
+
+    function toggleWishlistDrawer(open) {
+      const drawer = document.getElementById('wishlist-drawer');
+      const backdrop = document.getElementById('wishlist-drawer-backdrop');
+      if(open) {
+        renderWishlistDrawerItems();
+        drawer.classList.remove('translate-x-full');
+        backdrop.classList.remove('hidden');
+      } else {
+        drawer.classList.add('translate-x-full');
+        backdrop.classList.add('hidden');
+      }
+    }
+
+
+    // ==========================================
+    // TRENDING ARCHIVES GRID GENERATION
+    // ==========================================
+    function renderTrendingGrid() {
+      const container = document.getElementById('trending-products-grid');
+      container.innerHTML = '';
+
+      const items = activeTrendingFilter === 'all'
+        ? PRODUCT_ARCHIVES
+        : PRODUCT_ARCHIVES.filter(p => p.category === activeTrendingFilter);
+
+      items.forEach(p => {
+        const isWish = wishlist.includes(p.id);
+        const cardHTML = `
+          <div class="group border border-lineSilver/30 p-4 rounded-sm flex flex-col justify-between bg-white relative hover:shadow-xl transition-all duration-500 hover:border-obsidian/20">
+            <div>
+              <div class="relative overflow-hidden aspect-[3/4] bg-platinum rounded-sm mb-4 cursor-pointer" onclick="openQuickLook('${p.id}')">
+                <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover img-zoom">
+                <button onclick="toggleWishlist('${p.id}', event)" class="absolute top-4 right-4 bg-white/90 w-8 h-8 rounded-full flex items-center justify-center text-obsidian shadow-sm hover:scale-105 transition-all">
+                  <i class="${isWish ? 'fa-solid text-black' : 'fa-regular'} fa-heart text-xs"></i>
+                </button>
+              </div>
+
+              <div class="flex justify-between items-baseline mb-1">
+                <span class="text-[8px] tracking-widest text-studioGray uppercase font-bold">${p.category}</span>
+                <div class="flex gap-0.5 text-[8px] text-obsidian">
+                  ${getStarsHTML(p.rating)}
+                </div>
+              </div>
+
+              <h3 class="font-serif text-[15px] text-obsidian leading-snug hover:text-studioGray transition-colors cursor-pointer mb-2 line-clamp-1" onclick="openQuickLook('${p.id}')">${p.title}</h3>
+              <p class="text-xs text-studioGray font-serif italic mb-4">By ${p.brand}</p>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-lineSilver/50 pt-4 mt-auto">
+              <span class="font-serif text-sm font-bold text-obsidian">${p.price}</span>
+              <a href="${p.amazonUrl}" target="_blank" rel="nofollow sponsored" class="bg-obsidian text-white hover:bg-studioGray py-2 px-5 text-[9px] tracking-widest uppercase transition-colors duration-300 rounded-sm">
+                Get Deal
+              </a>
+            </div>
+          </div>
+        `;
+        container.insertAdjacentHTML('beforeend', cardHTML);
+      });
+    }
+
+    function filterTrending(cat, element) {
+      activeTrendingFilter = cat;
+      const buttons = element.parentElement.querySelectorAll('button');
+      buttons.forEach(btn => btn.className = 'px-4 py-2 border-b-2 border-transparent text-studioGray hover:text-obsidian transition-all');
+      
+      element.className = 'px-4 py-2 border-b-2 border-obsidian text-obsidian transition-all';
+      renderTrendingGrid();
+    }
+
+    function getStarsHTML(rating) {
+      let stars = '';
+      const full = Math.floor(rating);
+      for(let i=0; i<5; i++) {
+        stars += `<i class="${i < full ? 'fa-solid' : 'fa-regular'} fa-star text-[9px]"></i>`;
+      }
+      return stars;
+    }
+
+    // ==========================================
+    // BEST SELLERS SHOWPIECES
+    // ==========================================
+    function renderBestsellers() {
+      const container = document.getElementById('bestsellers-grid');
+      container.innerHTML = '';
+
+      BESTSELLERS.forEach((p, idx) => {
+        const isReverse = idx % 2 !== 0 ? 'lg:flex-row-reverse' : '';
+        const specsHTML = p.features.map(f => `
+          <li class="flex items-center gap-3 text-xs text-studioGray font-light">
+            <span class="w-1.5 h-1.5 rounded-full bg-obsidian"></span>
+            <span>${f}</span>
+          </li>
+        `).join('');
+
+        const rowHTML = `
+          <div class="flex flex-col lg:flex-row ${isReverse} gap-8 lg:gap-16 items-center">
+            
+            <!-- Graphic Block -->
+            <div class="w-full lg:w-1/2 aspect-video lg:aspect-[4/3] rounded-sm overflow-hidden bg-platinum relative group cursor-pointer" onclick="openQuickLook('${p.id}')">
+              <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover img-zoom">
+              <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span class="bg-white text-obsidian text-[10px] tracking-widest uppercase font-serif py-3 px-6 shadow-md rounded-sm">Inspect Spec</span>
+              </div>
+            </div>
+
+            <!-- Context Block -->
+            <div class="w-full lg:w-1/2">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-[9px] tracking-widest text-studioGray uppercase font-bold">${p.category} Archive</span>
+                <span class="border border-obsidian text-obsidian text-[8px] tracking-widest uppercase px-2 py-0.5 rounded-sm">Vetted No.1</span>
+              </div>
+              
+              <h3 class="font-serif text-2xl sm:text-4xl text-obsidian font-light mb-4">${p.title}</h3>
+              
+              <div class="flex items-center gap-2 mb-6">
+                <div class="flex gap-0.5 text-[9px] text-obsidian">${getStarsHTML(p.rating)}</div>
+                <span class="text-xs text-neutral-400 font-serif">(${p.reviewsCount} verified purchases)</span>
+              </div>
+
+              <p class="text-xs sm:text-sm text-studioGray leading-relaxed mb-6 font-light">${p.description}</p>
+              
+              <ul class="space-y-2 mb-8">
+                ${specsHTML}
+              </ul>
+
+              <div class="flex items-center justify-between border-t border-b border-lineSilver py-4 mb-8">
+                <span class="text-[10px] tracking-widest text-studioGray uppercase">Estimated valuation</span>
+                <span class="font-serif text-lg font-bold text-obsidian">${p.price}</span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row gap-4">
+                <a href="${p.amazonUrl}" target="_blank" rel="nofollow sponsored" class="flex-1 bg-obsidian text-white hover:bg-studioGray text-center py-3.5 text-xs tracking-widest uppercase transition-colors duration-300 rounded-sm">
+                  Acquire on Amazon
+                </a>
+                <button onclick="toggleWishlist('${p.id}', event)" class="border border-lineSilver text-obsidian hover:border-obsidian px-6 py-3.5 text-xs tracking-widest uppercase transition-colors duration-300 rounded-sm bg-white">
+                  Add to Saved List
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+        container.insertAdjacentHTML('beforeend', rowHTML);
+      });
+    }
+
+    // ==========================================
+    // WISHLIST MECHANICS & DATA MANAGEMENT
+    // ==========================================
+    function toggleWishlist(id, event) {
+      if(event) event.stopPropagation();
+
+      const index = wishlist.indexOf(id);
+      if(index > -1) {
+        wishlist.splice(index, 1);
+        showToast("Removed from your styling portfolio.");
+      } else {
+        wishlist.push(id);
+        showToast("Saved directly to your styling portfolio.");
+      }
+
+      localStorage.setItem('poshcourts_wishlist', JSON.stringify(wishlist));
+      updateWishlistBadge();
+      renderTrendingGrid();
+      
+      // Update quickview toggle btn if open
+      const qlBtn = document.getElementById('ql-wishlist-toggle');
+      if(qlBtn) {
+        qlBtn.textContent = wishlist.includes(id) ? "REMOVE FROM WISHLIST" : "SAVE TO PRIVATE EDIT";
+      }
+    }
+
+    function updateWishlistBadge() {
+      document.getElementById('wishlist-counter').textContent = wishlist.length;
+    }
+
+    function renderWishlistDrawerItems() {
+      const container = document.getElementById('wishlist-drawer-items');
+      container.innerHTML = '';
+
+      if (wishlist.length === 0) {
+        container.innerHTML = `
+          <p class="text-xs text-studioGray font-serif italic py-12 text-center leading-relaxed">
+            Your saved collection is empty. Tap the heart symbol next to your favorite pieces.
+          </p>
+        `;
+        return;
+      }
+
+      wishlist.forEach(id => {
+        const p = MASTER_INVENTORY.find(item => item.id === id);
+        if(!p) return;
+
+        const rowHTML = `
+          <div class="flex gap-4 border-b border-lineSilver/50 pb-4">
+            <img src="${p.image}" alt="${p.title}" class="w-14 h-14 object-cover rounded-sm bg-platinum">
+            <div class="flex-1">
+              <h4 class="text-xs font-serif font-bold text-obsidian line-clamp-1">${p.title}</h4>
+              <span class="text-[9px] text-studioGray tracking-widest uppercase">${p.category}</span>
+              <div class="flex items-center justify-between mt-2">
+                <span class="font-serif text-xs font-bold text-obsidian">${p.price}</span>
+                <div class="flex gap-3">
+                  <a href="${p.amazonUrl}" target="_blank" rel="nofollow sponsored" class="text-[9px] font-sans tracking-widest text-obsidian hover:text-studioGray uppercase underline">
+                    Buy Deal
+                  </a>
+                  <button onclick="toggleWishlist('${p.id}')" class="text-[9px] font-sans text-neutral-400 hover:text-red-600 uppercase">
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        container.insertAdjacentHTML('beforeend', rowHTML);
+      });
+    }
+
+    // ==========================================
+    // LIVE DYNAMIC GRAPHICAL QUICK VIEW
+    // ==========================================
+    function openQuickLook(id) {
+      const p = MASTER_INVENTORY.find(item => item.id === id);
+      if(!p) return;
+
+      document.getElementById('ql-image').src = p.image;
+      document.getElementById('ql-category').textContent = p.category;
+      document.getElementById('ql-title').textContent = p.title;
+      document.getElementById('ql-brand').textContent = p.brand;
+      document.getElementById('ql-price').textContent = p.price;
+      document.getElementById('ql-description').textContent = p.description;
+      document.getElementById('ql-amazon-url').href = p.amazonUrl;
+
+      // Render Features Bullet Points
+      const featuresBox = document.getElementById('ql-features');
+      featuresBox.innerHTML = p.features.map(f => `
+        <li class="flex items-center gap-3">
+          <span class="w-1.5 h-1.5 rounded-full bg-obsidian"></span>
+          <span>${f}</span>
+        </li>
+      `).join('');
+
+      // Toggle Wishlist Button in Quick Look
+      const isWish = wishlist.includes(p.id);
+      const qlBtn = document.getElementById('ql-wishlist-toggle');
+      qlBtn.textContent = isWish ? "REMOVE FROM WISHLIST" : "SAVE TO PRIVATE EDIT";
+      qlBtn.onclick = () => toggleWishlist(p.id);
+
+      // Open Panel UI
+      const panel = document.getElementById('quick-look-panel');
+      const backdrop = document.getElementById('quick-look-backdrop');
+      panel.classList.remove('hidden');
+      setTimeout(() => {
+        panel.classList.remove('translate-x-full');
+        backdrop.classList.remove('hidden');
+      }, 50);
+    }
+
+    function closeQuickLook() {
+      const panel = document.getElementById('quick-look-panel');
+      const backdrop = document.getElementById('quick-look-backdrop');
+      panel.classList.add('translate-x-full');
+      backdrop.classList.add('hidden');
+      setTimeout(() => panel.classList.add('hidden'), 500);
+    }
+
+    // ==========================================
+    // INSTANT LIVE SEARCH OPERATIONS
+    // ==========================================
+    function executeLiveSearch(query) {
+      const wrapper = document.getElementById('search-results-wrapper');
+      const container = document.getElementById('search-results-grid');
+      container.innerHTML = '';
+
+      if (query.trim().length < 2) {
+        wrapper.classList.add('hidden');
+        return;
+      }
+
+      const rawInput = query.toLowerCase();
+      const matches = MASTER_INVENTORY.filter(p => 
+        p.title.toLowerCase().includes(rawInput) ||
+        p.category.toLowerCase().includes(rawInput) ||
+        p.brand.toLowerCase().includes(rawInput)
+      );
+
+      if (matches.length === 0) {
+        container.innerHTML = `<p class="text-xs text-studioGray font-serif italic py-4">No matching luxury styling items found.</p>`;
+        wrapper.classList.remove('hidden');
+        return;
+      }
+
+      matches.forEach(p => {
+        const itemHTML = `
+          <div onclick="openQuickLookFromSearch('${p.id}')" class="flex items-center gap-3 p-2 hover:bg-platinum rounded-sm transition-colors cursor-pointer">
+            <img src="${p.image}" alt="${p.title}" class="w-10 h-10 object-cover rounded-sm">
+            <div class="flex-1">
+              <h5 class="text-xs font-serif font-bold text-obsidian leading-snug line-clamp-1">${p.title}</h5>
+              <span class="text-[8px] text-studioGray tracking-widest uppercase">${p.category}</span>
+            </div>
+            <span class="font-serif text-xs font-bold text-obsidian">${p.price}</span>
+          </div>
+        `;
+        container.insertAdjacentHTML('beforeend', itemHTML);
+      });
+
+      wrapper.classList.remove('hidden');
+    }
+
+    function openQuickLookFromSearch(id) {
+      toggleSearch(false);
+      openQuickLook(id);
+    }
+
+    // ==========================================
+    // NEWSLETTER SIMULATED HANDLER
+    // ==========================================
+    function handleNewsletterSubmit(event) {
+      event.preventDefault();
+      const emailInput = event.target.querySelector('input');
+      showToast(`ACCESS REQUEST FOR ${emailInput.value} REGISTERED.`);
+      emailInput.value = '';
+    }
+
+    // ==========================================
+    // RANDOMIZED BUYER NOTIFICATIONS
+    // ==========================================
+    const LUXURY_BUYERS = [
+      { name: "Sophia", city: "Paris", item: "Silken Cascade Mulberry Silk Lace Slip", time: "2 minutes ago" },
+      { name: "Isabella", city: "New York", item: "Velvet Cloud Off-White Cushion Sneaker", time: "Just now" },
+      { name: "Charlotte", city: "London", item: "AeroForm Minimalist Ribbed Sports Bra", time: "5 minutes ago" },
+      { name: "Olivia", city: "Tokyo", item: "SleekSculpt Compression High-Impact Bra", time: "12 minutes ago" },
+      { name: "Amelia", city: "Milan", item: "Solace Ribbed Performance Legging & Bra Set", time: "8 minutes ago" },
+      { name: "Emma", city: "Sydney", item: "Silk-Lace Ethereal Bralette Set", time: "15 minutes ago" },
+      { name: "Harper", city: "Zurich", item: "The Court Lux Leather Classic Sneaker", time: "4 minutes ago" },
+      { name: "Evelyn", city: "Munich", item: "Coordinated Ribbed Knit Loungewear Outfit", time: "20 minutes ago" },
+      { name: "Mia", city: "Los Angeles", item: "Silken Cascade Mulberry Silk Lace Slip", time: "Just now" },
+      { name: "Camila", city: "Singapore", item: "Solace Ribbed Performance Legging & Bra Set", time: "7 minutes ago" }
+    ];
+
+    function showFloatingNotification() {
+      const notificationEl = document.getElementById('floating-buyer-notif');
+      if (!notificationEl) return;
+      
+      // Pilih data pembeli secara acak
+      const buyer = LUXURY_BUYERS[Math.floor(Math.random() * LUXURY_BUYERS.length)];
+      
+      // Perbarui elemen UI dengan transisi halus
+      document.getElementById('fbn-buyer').textContent = `${buyer.name} from ${buyer.city}`;
+      document.getElementById('fbn-action').textContent = `purchased the ${buyer.item}`;
+      document.getElementById('fbn-time').textContent = buyer.time;
+      
+      // Memunculkan element dengan animasi meluncur ke atas
+      notificationEl.classList.remove('translate-y-24', 'opacity-0');
+      
+      // Sembunyikan otomatis setelah 6 detik
+      setTimeout(() => {
+        notificationEl.classList.add('translate-y-24', 'opacity-0');
+      }, 6000);
+    }
+
+    // Interval animasi notifikasi pembelian mengambang
+    setTimeout(() => {
+      showFloatingNotification();
+      // Muncul kembali setiap 14 detik dengan variasi data baru
+      setInterval(showFloatingNotification, 14000);
+    }, 4000);
+  </script>
+</body>
+</html>
