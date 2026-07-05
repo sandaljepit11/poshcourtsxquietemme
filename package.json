@@ -1,13 +1,16 @@
 {
-  "name": "poshcourts-paapi-integration",
-  "version": "1.0.0",
+  "name": "poshcourts-creators-api-integration",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "vercel dev",
     "start": "vercel dev"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
-    "paapi5-nodejs-sdk": "^1.1.0"
+    "amazon-creators-api": "^1.2.2"
   },
   "devDependencies": {
     "vercel": "latest"
